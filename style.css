@@ -22,6 +22,11 @@ body {
     font-weight: bold;
 }
 
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
 .nav .home-button {
     color: white;
     text-decoration: none;
@@ -29,7 +34,6 @@ body {
     padding: 5px 10px;
     border: 1px solid white;
     border-radius: 3px;
-    transition: background-color 0.3s, color 0.3s;
 }
 
 .nav .home-button:hover {
