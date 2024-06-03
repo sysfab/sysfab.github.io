@@ -20,6 +20,7 @@ body {
 .logo {
     font-size: 1.5em;
     font-weight: bold;
+    user-select: none;
 }
 
 @keyframes blink {
@@ -34,6 +35,7 @@ body {
     padding: 5px 10px;
     border: 1px solid white;
     border-radius: 3px;
+    user-select: none;
 }
 
 .nav .home-button:hover {
@@ -48,6 +50,7 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
     max-height: calc(100vh - 170px);
+    overflow-x: auto;
     overflow-y: auto;
 }
 
@@ -57,13 +60,53 @@ h1 {
 }
 
 p {
-    color: #666;
+    color: rgb(60, 60, 60, 1.0);
     padding-bottom: 10px;
     font-size: 18px;
     line-height: 1.5;
 }
 
 .button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    color: white;
+    background-color: rgb(77, 77, 77, 1.0);
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.07s;
+    user-select: none;
+}
+
+.button:hover {
+    background-color: rgb(66, 66, 66, 1.0);
+}
+
+.github-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    background-color: rgb(41, 41, 41, 1.0);
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.07s;
+    user-select: none;
+}
+
+.github-button:hover {
+    background-color: rgb(30, 30, 30, 1.0);
+}
+
+.telegram-button {
     display: inline-block;
     padding: 10px 20px;
     margin: 10px 0;
@@ -76,10 +119,11 @@ p {
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.07s;
+    user-select: none;
 }
 
-.button:hover {
-    background-color: #0056b3;
+.telegram-button:hover {
+    background-color: rgb(0, 112, 244, 1.0);
 }
 
 .social {
