@@ -1,29 +1,25 @@
 document.addEventListener("DOMContentLoaded", function() {
-    var logo = document.querySelector(".logo");
+    var logo = $(".logo");
     if (logo) {
-        logo.style.display = "inline-block";
+        logo.css({"display": "inline-block"});
 
-        logo.innerHTML += '<div id="cursor-container"></div>';
+        logo.append('<div id="cursor-container"></div>');
         
-        var cursorContainer = document.getElementById("cursor-container");
-        if (cursorContainer) {
-            cursorContainer.innerHTML = '<div id="blinking-cursor"></div>';
-        }
-        
-        cursorContainer.style.position = "relative";
-        cursorContainer.style.display = "inline-block";
-        cursorContainer.style.verticalAlign = "middle";
+        var cc = $("#cursor-container");
+        cc.append('<div id="blinking-cursor"></div>');
 
-        var blinkingCursor = document.getElementById("blinking-cursor");
-        if (blinkingCursor) {
-            blinkingCursor.style.width = "0.7em";
-            blinkingCursor.style.height = "3px";
-            blinkingCursor.style.background = "white";
-            blinkingCursor.style.position = "absolute";
-            blinkingCursor.style.top = "50%";
-            blinkingCursor.style.margin = "0px 0px 0px 5px";
-            blinkingCursor.style.transform = "translateY(100%)";
-            blinkingCursor.style.animation = "blink 1s infinite";
-        }
+        cc.css({"position": "relative"});
+        cc.css({"display": "inline-block"});
+        cc.css({"verticalAlign": "middle"});
+
+        var bc = $("#blinking-cursor");
+        bc.css({"width": "0.7em"});
+        bc.css({"height": "3px"});
+        bc.css({"background": "white"});
+        bc.css({"position": "absolute"});
+        bc.css({"top": "50%"});
+        bc.css({"margin": "0px 0px 0px 5px"});
+        bc.css({"transform": "translateY(100%)"});
+        bc.css({"animation": "blink 1s infinite"});
     }
 });
