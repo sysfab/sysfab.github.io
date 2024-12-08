@@ -5,45 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="SysFAB's website">
     <meta name="author" content="SysFAB">
-    <meta name="keywords" content="HTML, CSS, JavaScript, Lua, Python, GitHub">
 
-    <title>SysFAB</title>
+    <title>SysFAB - Home</title>
 
-    <link rel="stylesheet" href="/static/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="/static/mainScript.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="top-bar">
-        <div class="flag">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="50" height="30">
-                <rect width="1000" height="600" fill="#005BBB"/>
-                <path fill="#FFDD00" d="M0 300h1000v300H0z"/>
-                <path fill="#0057B7" d="M0 0h1000v300H0z"/>
-            </svg>
+    <script src="/static/splash.js"></script> 
+    <div class="content-wrapper">
+        <div class="navbar">
+            <div class="logo">
+                <a href="#">SysFAB</a>
+            </div>
+            <div class="menu">
+                <a href="/">Home</a>
+                <a href="/projects/">Projects</a>
+            </div>
         </div>
-        <div class="logo">SysFAB</div>
-        <div class="nav">
-            <a href="/" class="home-button">Home</a>
-            <a href="/projects/" class="home-button">Projects</a>
+        <div class="hero">
+            <h1>Home</h1>
+            <p class="splash">Hello world!</p>
+        </div>
+        <div class="content">
+            <h2>About Me</h2>
+            <p>I'm SysFAB - lazy programmer from Ukraine. Coding stuff for myself when have some free time. Don't have much public repos on github.</p>
+            <a href="https://github.com/sysfab" target="_blank" class="button">My GitHub</a>
         </div>
     </div>
-    <div class="content">
-        <h1>Home</h1>
-        <p>Welcome to my website.</p>
-        <p>
-            I'm SysFAB - lazy developer that has some projects<br>
-            See 'Projects' tab to see ones that i like<br>
-            For others - see my github<br>
-        </p>
-    </div>
-    <div class="social">
-        <a href="https://t.me/sysfab_64" class="telegram-button">Telegram</a>
-        <a href="https://github.com/sysfab" class="github-button">GitHub</a>
-    </div>
+    <footer>
+        Discord: @sysfabber | Telegram: @sysfab64
+    </footer>
 </body>
 </html>
