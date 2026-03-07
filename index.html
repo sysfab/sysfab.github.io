@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>sysfab</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0c0c0c;
+      color: #d8d8d8;
+      font-family: 'JetBrains Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      overflow: hidden;
+    }
+
+    #bg {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 640px;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    .logo {
+      font-size: clamp(2.2rem, 6vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #f0f0f0;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .tagline {
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: #555;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      min-height: 1em;
+    }
+
+    .bio {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: #777;
+      font-weight: 300;
+      white-space: pre-wrap;
+      min-height: 3em;
+    }
+
+    .links { display: flex; flex-direction: column; gap: 0.1rem; }
+
+    .link-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      text-decoration: none;
+      color: #d8d8d8;
+      opacity: 0;
+      transition: opacity 0.25s ease, color 0.15s;
+    }
+    .link-row.visible { opacity: 1; }
+    .link-row:hover { color: #f0f0f0; }
+    .link-row:hover .link-arrow { transform: translateX(4px); color: #f0f0f0; }
+    .link-row:hover .link-host { color: #666; }
+
+    .link-label-text { font-size: 0.8rem; font-weight: 400; letter-spacing: 0.05em; }
+    .link-meta { display: flex; align-items: center; gap: 0.9rem; }
+    .link-host { font-size: 0.68rem; color: #444; font-weight: 300; transition: color 0.15s; }
+    .link-arrow { font-size: 0.75rem; color: #444; transition: transform 0.15s, color 0.15s; display: inline-block; }
+
+    .contacts { display: flex; flex-direction: column; gap: 0.1rem; }
+    .contact-row { display: flex; align-items: baseline; justify-content: space-between; padding: 0.6rem 0; }
+    .contact-platform-text { font-size: 0.68rem; font-weight: 300; color: #444; letter-spacing: 0.06em; text-transform: uppercase; }
+    .contact-handle { font-size: 0.8rem; font-weight: 400; color: #888; }
+
+    .footer { font-size: 0.62rem; color: #333; font-weight: 300; letter-spacing: 0.06em; }
+
+    #logo-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 0.85em;
+      background: #f0f0f0;
+      vertical-align: middle;
+      margin-left: 3px;
+      position: relative;
+      top: -0.05em;
+    }
+
+    #logo-cursor {
+      animation: smoothBlink 0.9s ease-in-out infinite;
+    }
+
+    @keyframes smoothBlink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0; }
+    }
+
+    .link-icon, .contact-icon {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      opacity: 0.35;
+      transition: opacity 0.15s;
+    }
+    .link-icon svg, .contact-icon svg { width: 14px; height: 14px; fill: currentColor; }
+    .link-row:hover .link-icon { opacity: 0.7; }
+
+    .link-label {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-platform {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: #444;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 480px) { .link-host { display: none; } }
+  </style>
+</head>
+<body>
+
+  <canvas id="bg"></canvas>
+
+  <main class="page">
+    <div>
+      <div class="logo"><span id="t-logo"></span><span id="logo-cursor"></span></div>
+      <div class="tagline"><span id="t-tagline"></span></div>
+    </div>
+
+    <p class="bio"><span id="t-bio"></span></p>
+
+    <div class="links">
+      <a class="link-row" id="link-github" href="https://github.com/sysfab" target="_blank" rel="noopener">
+        <span class="link-label">
+          <span class="link-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></span>
+          github
+        </span>
+        <span class="link-meta"><span class="link-host">github.com/sysfab</span><span class="link-arrow">→</span></span>
+      </a>
+      <a class="link-row" id="link-fiverr" href="https://www.fiverr.com/sysfab" target="_blank" rel="noopener">
+        <span class="link-label">
+          <span class="link-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm1.553 6.826a1.28 1.28 0 1 1 0 2.56 1.28 1.28 0 0 1 0-2.56zm2.514 10.376h-2.044v-5.3h-1.327v-1.54h1.327v-.636c0-1.404.636-2.243 2.243-2.243.381 0 .762.05 1.143.1v1.49a5.5 5.5 0 0 0-.736-.05c-.686 0-.762.254-.762.737v.602h1.473l-.2 1.54h-1.272v5.3zm-5.02 0H9.003v-5.3H7.83v-1.54h1.172v-.636C9.003 8.322 9.64 7.483 11.246 7.483c.381 0 .762.05 1.143.1v1.49a5.5 5.5 0 0 0-.736-.05c-.686 0-.762.254-.762.737v.602h1.397l-.2 1.54h-1.04v5.3z"/></svg></span>
+          fiverr
+        </span>
+        <span class="link-meta"><span class="link-host">fiverr.com/sysfab</span><span class="link-arrow">→</span></span>
+      </a>
+    </div>
+
+    <div class="contacts">
+      <div class="contact-row">
+        <span class="contact-platform">
+          <span class="contact-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></span>
+          discord
+        </span>
+        <span class="contact-handle"><span id="t-discord"></span></span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-platform">
+          <span class="contact-icon"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></span>
+          telegram
+        </span>
+        <span class="contact-handle"><span id="t-telegram"></span></span>
+      </div>
+    </div>
+
+    <div class="footer"><span id="t-footer"></span></div>
+  </main>
+
+  <script>
+    (function () {
+      const canvas = document.getElementById('bg');
+      const ctx = canvas.getContext('2d');
+      let W, H, dots;
+      const mouse = { x: -9999, y: -9999 };
+      const AVOID_R = 60;
+      const AVOID_F = 0.004;
+
+      window.addEventListener('mousemove', e => {
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+      });
+      window.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+      function resize() {
+        W = canvas.width  = canvas.clientWidth  || window.innerWidth;
+        H = canvas.height = canvas.clientHeight || window.innerHeight;
+      }
+
+      function makeDot() {
+        return {
+          x:     Math.random() * W,
+          y:     Math.random() * H,
+          r:     Math.random() * 1.8 + 0.7,
+          vx:    (Math.random() - 0.5) * 0.18,
+          vy:    (Math.random() - 0.5) * 0.18,
+
+          bvx:   0,
+          bvy:   0,
+          phase: Math.random() * Math.PI * 2,
+          speed: Math.random() * 0.007 + 0.003,
+          baseA: Math.random() * 0.13 + 0.06 - 0.025,
+          ampA:  Math.random() * 0.09 + 0.03 - 0.015,
+        };
+      }
+
+      function init() {
+        resize();
+        dots = Array.from({ length: 120 }, makeDot);
+        dots.forEach(d => { d.bvx = d.vx; d.bvy = d.vy; });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        for (const d of dots) {
+
+          const dx = d.x - mouse.x;
+          const dy = d.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < AVOID_R && dist > 0.01) {
+            const force = (AVOID_R - dist) / AVOID_R;
+            d.vx += (dx / dist) * force * AVOID_F * 60;
+            d.vy += (dy / dist) * force * AVOID_F * 60;
+          }
+
+          d.vx += (d.bvx - d.vx) * 0.06;
+          d.vy += (d.bvy - d.vy) * 0.06;
+
+          d.phase += d.speed;
+          const alpha = Math.max(0, d.baseA + d.ampA * Math.sin(d.phase));
+          d.x += d.vx;
+          d.y += d.vy;
+          if (d.x < -4)    d.x = W + 4;
+          if (d.x > W + 4) d.x = -4;
+          if (d.y < -4)    d.y = H + 4;
+          if (d.y > H + 4) d.y = -4;
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${alpha.toFixed(3)})`;
+          ctx.fill();
+        }
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', () => { resize(); });
+      init();
+      requestAnimationFrame(draw);
+    })();
+
+    function type(spanId, text, speed, delay = 0) {
+      return new Promise(resolve => {
+        const el = document.getElementById(spanId);
+        setTimeout(() => {
+          let i = 0;
+          const iv = setInterval(() => {
+            el.textContent += text[i++];
+            if (i >= text.length) { clearInterval(iv); resolve(); }
+          }, speed);
+        }, delay);
+      });
+    }
+
+    function showLink(id, delay) {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          document.getElementById(id).classList.add('visible');
+          resolve();
+        }, delay);
+      });
+    }
+
+    async function run() {
+      const S = 18;
+
+      await Promise.all([
+        type('t-logo',    'sysfab',   S * 2.5,   0),
+        type('t-tagline', 'python developer',  S, 60),
+        type('t-bio',     'I build applications, bots and scripts.', S, 120),
+        showLink('link-github',  0),
+        showLink('link-fiverr',  0),
+        type('t-discord',  '@sysfab',   S * 2, 200),
+        type('t-telegram', '@sysfab64', S * 2, 320),
+        type('t-footer', 'sysfab — all rights reserved :)', S, 0),
+      ]);
+    }
+
+    run();
+  </script>
+</body>
+</html>
