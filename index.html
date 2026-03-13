@@ -146,6 +146,38 @@
     }
 
     @media (max-width: 480px) { .link-host { display: none; } }
+
+    /* ── nixwebring ─────────────────────────────────────────── */
+    .webring-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .webring-section.visible { opacity: 1; }
+
+    .webring-divider {
+      font-size: 0.58rem;
+      font-weight: 300;
+      color: #2d2d2d;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding-bottom: 0.3rem;
+    }
+    .webring-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, #1e1e1e, transparent);
+    }
+
+    /* webring rows reuse .link-row — just tint the icon purple on hover */
+    .webring-section.visible .webring-row { opacity: 1; }
+    .webring-row:hover .link-icon { color: #7c3aed; opacity: 0.8; }
   </style>
 </head>
 <body>
@@ -195,6 +227,47 @@
     </div>
 
     <div class="footer"><span id="t-footer"></span></div>
+
+    <!-- nixwebring -->
+    <div class="webring-section" id="webring-section">
+      <div class="webring-divider">nixwebr.ing</div>
+      <a class="link-row webring-row" href="https://nixwebr.ing/prev/sysfab">
+        <span class="link-label">
+          <span class="link-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+          </span>
+          prev
+        </span>
+        <span class="link-meta"><span class="link-host">nixwebr.ing/prev/sysfab</span><span class="link-arrow">→</span></span>
+      </a>
+      <a class="link-row webring-row" href="https://nixwebr.ing">
+        <span class="link-label">
+          <span class="link-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2L3 7v10l9 5 9-5V7L12 2z" stroke="currentColor" stroke-width="1.5"/><path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+          </span>
+          nixwebr.ing
+        </span>
+        <span class="link-meta"><span class="link-host">nixwebr.ing</span><span class="link-arrow">→</span></span>
+      </a>
+      <a class="link-row webring-row" href="https://nixwebr.ing/next/sysfab">
+        <span class="link-label">
+          <span class="link-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8-8-8z"/></svg>
+          </span>
+          next
+        </span>
+        <span class="link-meta"><span class="link-host">nixwebr.ing/next/sysfab</span><span class="link-arrow">→</span></span>
+      </a>
+      <a class="link-row webring-row" href="https://nixwebr.ing/rand">
+        <span class="link-label">
+          <span class="link-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.42 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+          </span>
+          random
+        </span>
+        <span class="link-meta"><span class="link-host">nixwebr.ing/rand</span><span class="link-arrow">→</span></span>
+      </a>
+    </div>
   </main>
 
   <script>
@@ -312,6 +385,7 @@
         type('t-telegram', '@sysfab64', S * 2, 320),
         type('t-footer', 'sysfab — all rights reserved', S, 0),
       ]);
+      document.getElementById('webring-section').classList.add('visible');
     }
 
     run();
