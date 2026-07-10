@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+    font-family: 'Nunito';
+    color: white;
+}
+
+body {
+    background: rgb(10, 10, 10);
+}
+
+html,
+body,
+#root {
+    min-height: 100vh;
+    margin: 0;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+}
+
+p  { font-size: 24px }
+h6 { font-size: 28px }
+h5 { font-size: 32px }
+h4 { font-size: 36px }
+h3 { font-size: 40px }
+h2 { font-size: 44px }
+h1 { font-size: 48px }
+
+/*
+    Title
+*/
+.title {
+    width: 100%;
+    padding: 10px 0px 25px 0px;
+
+    display: flex;
+    justify-content: center;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(3, 3, 3, 1.0) 80%,
+        rgba(3, 3, 3, 0.0)
+    );
+}
+
+.title * {
+    margin: 0px;
+
+    text-shadow: 0px 0px 12px rgba(255, 255, 255, 0.6);
+    user-select: none;
+}
+
+/*
+    Body
+*/
+.body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+
+    padding: 0px;
+}
+
+
+.welcome {
+    padding: 15px;
+    margin-bottom: 20px;
+
+    background: rgb(0, 0, 0);
+    border: solid 2px  rgb(100, 100, 100);
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome * {
+    margin: 0px;
+    padding: 5px;
+
+    background: rgb(0, 0, 0);
+    border-radius: 10px;
+}
+
+
+.card-container {
+    padding: 15px 15px 0px 15px;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    user-select: none;
+
+    padding: 20px 20px 25px 20px;
+    margin-bottom: 20px;
+
+    display: flex;
+    flex-direction: row;
+    border-radius: 10px;
+
+    background-position: left;
+    transition: 200ms;
+}
+
+.card .card-icon-container * {
+    transition-duration: 200ms;
+}
+
+.card:hover .card-icon-container * {
+    font-size: 60px;
+}
+
+#github {
+    border: solid 2px #333;
+    background: linear-gradient(
+        90deg,
+        #000,
+        #141414,
+        #333
+    );
+    background-size: 200% 100%;
+}
+
+#github:hover {
+    border: solid 2px rgba(255, 255, 255, 1);
+    background-position: right;
+}
+
+
+#discord {
+    border: solid 2px rgb(114, 137, 218);
+    background: linear-gradient(
+        90deg,
+        rgb(60, 75, 130),
+        rgb(90, 110, 180),
+        rgb(114, 137, 218)
+    );
+    background-size: 200% 100%;
+}
+
+#discord:hover {
+    border: solid 2px rgba(255, 255, 255, 1);
+    background-position: right;
+}
+
+
+#support {
+    border: solid 2px rgb(76, 175, 80);
+    background: linear-gradient(
+        90deg,
+        rgb(25,70,30),
+        rgb(50,130,60),
+        rgb(76,175,80)
+    );
+    background-size: 200% 100%;
+}
+
+#support:hover {
+    border: solid 2px rgba(255, 255, 255, 1);
+    background-position: right;
+}
+
+
+.card-icon-container {
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-icon-container * {
+    font-size: 48px;
+}
+
+.card-text-container {
+    padding: 5px;
+}
+
+.card-text-container * {
+    padding: 0px;
+    margin: 0px;
+}
+
+.card-title {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.card-description {
+    font-size: 24px
+}
