@@ -4,20 +4,38 @@ import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export function Card({ id, icon, title, description, url }) {
-    return <div
-        className="card"
-        id={id}
-    >
+    const content = (
+        <>
+            <div className="card-icon-container">
+                <FontAwesomeIcon icon={icon} />
+            </div>
 
-        <div className="card-icon-container">
-            <FontAwesomeIcon icon={icon} />
-        </div>
-        <div className="card-text-container">
-            <p className="card-title">{title}</p>
-            <p className="card-description">{description}</p>
-        </div>
+            <div className="card-text-container">
+                <p className="card-title">{title}</p>
+                <p className="card-description">{description}</p>
+            </div>
+        </>
+    );
 
-    </div>
+    if (url) {
+        return (
+            <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card"
+                id={id}
+            >
+                {content}
+            </a>
+        );
+    }
+
+    return (
+        <div className="card" id={id}>
+            {content}
+        </div>
+    );
 }
 
 export default function Body() {

@@ -9,6 +9,11 @@ body {
     background: rgb(10, 10, 10);
 }
 
+a {
+    text-decoration: none;
+    user-select: none;
+}
+
 html,
 body,
 #root {
@@ -97,8 +102,6 @@ h1 { font-size: 48px }
 }
 
 .card {
-    user-select: none;
-
     padding: 20px 20px 25px 20px;
     margin-bottom: 20px;
 
@@ -196,5 +199,6 @@ h1 { font-size: 48px }
 }
 
 .card-description {
-    font-size: 24px
+    font-size: 24px;
+    user-select: none;
 }
