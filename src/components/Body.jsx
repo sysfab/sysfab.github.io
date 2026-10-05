@@ -1,21 +1,31 @@
 import { faDiscord } from "@fortawesome/free-brands-svg-icons/faDiscord";
 import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub";
 import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
+import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useRef, useState } from "react";
 
-export function Card({ id, icon, title, description, url }) {
+export function Card({ id, icon, title, description, url, onClick, label, copied }) {
     const content = (
         <>
-            <div className="card-icon-container">
+            <span className="card-icon-container">
                 <FontAwesomeIcon icon={icon} />
-            </div>
+            </span>
 
-            <div className="card-text-container">
-                <p className="card-title">{title}</p>
-                <p className="card-description">{description}</p>
-            </div>
+            <span className="card-text-container">
+                <span className="card-title">{title}</span>
+                <span className="card-description">{description}</span>
+            </span>
         </>
     );
+
+    if (onClick) {
+        return (
+            <button type="button" className={`card${copied ? " is-copied" : ""}`} id={id} onClick={onClick} aria-label={label}>
+                {content}
+            </button>
+        );
+    }
 
     if (url) {
         return (
@@ -39,6 +49,24 @@ export function Card({ id, icon, title, description, url }) {
 }
 
 export default function Body() {
+    const [copyStatus, setCopyStatus] = useState("");
+    const resetTimer = useRef(null);
+
+    useEffect(() => () => clearTimeout(resetTimer.current), []);
+
+    async function copyDiscordUsername() {
+        clearTimeout(resetTimer.current);
+
+        try {
+            await navigator.clipboard.writeText("sysfab");
+            setCopyStatus("Copied!");
+        } catch {
+            setCopyStatus("Couldn't copy. Select and copy @sysfab manually.");
+        }
+
+        resetTimer.current = setTimeout(() => setCopyStatus(""), 4000);
+    }
+
     return <div className="body">
         <div className="card-container">
             <Card
@@ -54,7 +82,22 @@ export default function Body() {
                 icon={faDiscord}
 
                 title="@sysfab"
-                description="Replying as soon as possible!"
+                description={
+                    <span className="discord-feedback">
+                        <span className={`discord-hint${copyStatus ? " is-hidden" : ""}`} aria-hidden={!!copyStatus}>
+                            Click to copy my Discord username
+                        </span>
+                        <span className={`copy-status${copyStatus ? " is-visible" : ""}`} role="status" aria-atomic="true">
+                            {copyStatus === "Copied!" ? <>
+                                <FontAwesomeIcon icon={faCheck} className="copy-check" />
+                                Username copied!
+                            </> : copyStatus}
+                        </span>
+                    </span>
+                }
+                onClick={copyDiscordUsername}
+                label="Copy Discord username sysfab"
+                copied={copyStatus === "Copied!"}
             />
             <Card
                 id="support"
@@ -67,10 +110,19 @@ export default function Body() {
 
             <div className="spacer" style={{ flex: '1' }}></div>
 
-            <div className="welcome">
-                <p>Coding, Playing, Sleeping</p>
-                <p>🇺🇦 Ukraine</p>
-            </div>
+            <footer className="welcome" aria-label="About sysfab">
+                <p className="footer-interests">
+                    <span>Coding</span>
+                    <span className="footer-separator" aria-hidden="true">/</span>
+                    <span>Playing</span>
+                    <span className="footer-separator" aria-hidden="true">/</span>
+                    <span>Sleeping</span>
+                </p>
+                <p className="footer-location">
+                    <span className="ukraine-flag" aria-hidden="true" />
+                    Ukraine
+                </p>
+            </footer>
         </div>
     </div>
 }
