@@ -164,6 +164,7 @@ h1 { font-size: 48px }
 
     display: flex;
     flex-direction: row;
+    align-items: center;
     border-radius: 10px;
 
     background-position: left;
