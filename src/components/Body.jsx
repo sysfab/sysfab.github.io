@@ -70,7 +70,7 @@ export default function Body() {
                 icon="github"
 
                 title="Github"
-                description="Place where i publish my projects (don't look)"
+                description="See my projects!"
                 url="https://www.github.com/sysfab"
             />
             <Card
@@ -81,7 +81,7 @@ export default function Body() {
                 description={
                     <span className="discord-feedback">
                         <span className={`discord-hint${copyStatus ? " is-hidden" : ""}`} aria-hidden={!!copyStatus}>
-                            Click to copy my Discord username
+                            Message me here! (Click to copy)
                         </span>
                         <span className={`copy-status${copyStatus ? " is-visible" : ""}`} role="status" aria-atomic="true">
                             {copyStatus === "Copied!" ? <>
@@ -92,7 +92,7 @@ export default function Body() {
                     </span>
                 }
                 onClick={copyDiscordUsername}
-                label="Copy Discord username sysfab"
+                label="Copy Discord username"
                 copied={copyStatus === "Copied!"}
             />
             <Card
@@ -100,7 +100,7 @@ export default function Body() {
                 icon="heart"
 
                 title="Support me"
-                description="You can support me with donation :3"
+                description="If you want to make me happy :3"
                 url="https://donatello.to/sysfab"
             />
 
@@ -108,11 +108,9 @@ export default function Body() {
 
             <footer className="welcome" aria-label="About sysfab">
                 <p className="footer-interests">
-                    <span>Coding</span>
+                    <span>YOLO</span>
                     <span className="footer-separator" aria-hidden="true">/</span>
-                    <span>Playing</span>
-                    <span className="footer-separator" aria-hidden="true">/</span>
-                    <span>Sleeping</span>
+                    <span>Drink water :0</span>
                 </p>
                 <p className="footer-location">
                     <span className="ukraine-flag" aria-hidden="true" />
