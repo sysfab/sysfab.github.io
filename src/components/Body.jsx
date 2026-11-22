@@ -1,15 +1,11 @@
-import { faDiscord } from "@fortawesome/free-brands-svg-icons/faDiscord";
-import { faGithub } from "@fortawesome/free-brands-svg-icons/faGithub";
-import { faHeart } from "@fortawesome/free-solid-svg-icons/faHeart";
-import { faCheck } from "@fortawesome/free-solid-svg-icons/faCheck";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Icon from "./Icon.jsx";
 import { useEffect, useRef, useState } from "react";
 
 export function Card({ id, icon, title, description, url, onClick, label, copied }) {
     const content = (
         <>
             <span className="card-icon-container">
-                <FontAwesomeIcon icon={icon} />
+                <Icon name={icon} />
             </span>
 
             <span className="card-text-container">
@@ -71,7 +67,7 @@ export default function Body() {
         <div className="card-container">
             <Card
                 id="github"
-                icon={faGithub}
+                icon="github"
 
                 title="Github"
                 description="Place where i publish my projects (don't look)"
@@ -79,7 +75,7 @@ export default function Body() {
             />
             <Card
                 id="discord"
-                icon={faDiscord}
+                icon="discord"
 
                 title="@sysfab"
                 description={
@@ -89,7 +85,7 @@ export default function Body() {
                         </span>
                         <span className={`copy-status${copyStatus ? " is-visible" : ""}`} role="status" aria-atomic="true">
                             {copyStatus === "Copied!" ? <>
-                                <FontAwesomeIcon icon={faCheck} className="copy-check" />
+                                <Icon name="check" className="copy-check" />
                                 Username copied!
                             </> : copyStatus}
                         </span>
@@ -101,7 +97,7 @@ export default function Body() {
             />
             <Card
                 id="support"
-                icon={faHeart}
+                icon="heart"
 
                 title="Support me"
                 description="You can support me with donation :3"

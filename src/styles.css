@@ -1,8 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+/* Nunito, SIL OFL 1.1: /licenses/nunito.txt. Printable ASCII, upright weights only. */
+@font-face {
+    font-family: 'Nunito';
+    src: url('./assets/nunito-ascii-400-700.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    unicode-range: U+0020-007E;
+}
 
 * {
-    font-family: 'Nunito';
+    font-family: 'Nunito', system-ui, sans-serif;
     color: white;
+}
+
+.icon {
+    box-sizing: content-box;
+    display: inline-block;
+    height: 1em;
+    width: 1.25em;
+    overflow: visible;
+    vertical-align: -0.125em;
 }
 
 body {
