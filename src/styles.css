@@ -91,8 +91,6 @@ h1 { font-size: 48px }
     padding: 24px 22px;
     margin: 12px 0 20px;
 
-    border-top: 1px solid #292929;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -112,7 +110,6 @@ h1 { font-size: 48px }
     align-items: center;
     gap: 8px;
     padding-left: 24px;
-    border-left: 1px solid #333;
 }
 
 .footer-interests {
@@ -120,10 +117,6 @@ h1 { font-size: 48px }
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
-}
-
-.footer-separator {
-    color: #666;
 }
 
 .ukraine-flag {
@@ -144,8 +137,6 @@ h1 { font-size: 48px }
     .footer-location {
         align-self: stretch;
         padding: 16px 0 0;
-        border-left: 0;
-        border-top: 1px solid #292929;
     }
 }
 

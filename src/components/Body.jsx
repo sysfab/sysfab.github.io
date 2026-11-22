@@ -17,7 +17,7 @@ export function Card({ id, icon, title, description, url, onClick, label, copied
 
     if (onClick) {
         return (
-            <button type="button" className={`card${copied ? " is-copied" : ""}`} id={id} onClick={onClick} aria-label={label}>
+            <button type="button" className={`card${copied ? " is-copied" : ""}`} id={id} onClick={onClick} aria-label={label} draggable={false}>
                 {content}
             </button>
         );
@@ -31,6 +31,7 @@ export function Card({ id, icon, title, description, url, onClick, label, copied
                 rel="noopener noreferrer"
                 className="card"
                 id={id}
+                draggable={false}
             >
                 {content}
             </a>
@@ -38,7 +39,7 @@ export function Card({ id, icon, title, description, url, onClick, label, copied
     }
 
     return (
-        <div className="card" id={id}>
+        <div className="card" id={id} draggable={false}>
             {content}
         </div>
     );
@@ -108,9 +109,7 @@ export default function Body() {
 
             <footer className="welcome" aria-label="About sysfab">
                 <p className="footer-interests">
-                    <span>YOLO</span>
-                    <span className="footer-separator" aria-hidden="true">/</span>
-                    <span>Drink water :0</span>
+                    <span>Drink water!</span>
                 </p>
                 <p className="footer-location">
                     <span className="ukraine-flag" aria-hidden="true" />
